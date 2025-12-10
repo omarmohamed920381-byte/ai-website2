@@ -1,0 +1,17 @@
+
+body{margin:0;font-family:sans-serif;background:#000;color:#fff;overflow:hidden}
+.bg{
+ position:fixed;inset:0;
+ background:radial-gradient(circle at 20% 30%,rgba(80,120,255,.3),transparent),
+             radial-gradient(circle at 80% 70%,rgba(255,80,120,.2),transparent);
+ filter:blur(60px);
+ animation:move 15s infinite alternate;
+}
+@keyframes move{
+ 0%{transform:translateY(0)}
+ 100%{transform:translateY(-40px)}
+}
+.container{position:relative;z-index:10;padding:40px;max-width:600px;margin:auto;text-align:center}
+input{width:100%;padding:12px;border-radius:8px;border:none;margin:10px 0}
+button{padding:12px 20px;border-radius:8px;border:none;background:#6c8cff;color:#fff;cursor:pointer}
+img{max-width:100%;margin-top:20px;border-radius:12px}
