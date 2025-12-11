@@ -10,12 +10,19 @@ export default async function handler(req, res) {
 
     const completion = await client.chat.completions.create({
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: userMsg }]
+      messages: [
+        { role: "user", content: userMsg }
+      ]
     });
 
-    res.status(200).json({ reply: completion.choices[0].message.content });
+    res.status(200).json({
+      reply: completion.choices[0].message.content
+    });
 
-  } catch (e) {
-    res.status(500).json({ error: e.message });
+  } catch (err) {
+    console.error("API Error:", err);
+    res.status(500).json({
+      error: err.message || "Server error"
+    });
   }
 }
