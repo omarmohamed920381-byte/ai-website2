@@ -1,18 +1,23 @@
-async function sendMsg(){
-  const inp=document.getElementById('prompt');
-  const chat=document.getElementById('chat');
-  const msg=inp.value.trim();
-  if(!msg) return;
-  chat.innerHTML += `<div><b>You:</b> ${msg}</div>`;
-  inp.value="";
-  const res = await fetch("/api/chat",{
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({message:msg})
-  });
-  const data = await res.json();
-  chat.innerHTML += `<div><b>AI:</b> ${data.reply}</div>`;
+import OpenAI from "openai";
+
+export default async function handler(req, res) {
+  try {
+    const client = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY
+    });
+
+    const userMsg = req.body.message || "";
+
+    const completion = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: userMsg }]
+    });
+
+    res.status(200).json({
+      reply: completion.choices[0].message.content
+    });
+
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 }
-document.getElementById('prompt').addEventListener("keydown",e=>{
-  if(e.key==="Enter") sendMsg();
-});
