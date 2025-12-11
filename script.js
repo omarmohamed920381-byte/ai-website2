@@ -18,10 +18,10 @@ async function sendMsg() {
     chat.innerHTML += <div><b>AI:</b> ${data.reply}</div>;
 }
 
-// ✅ FIXED Enter key listener
+// Enable Enter key
 document.getElementById('prompt').addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        e.preventDefault();     // ← prevents newline
+        e.preventDefault();
         sendMsg();
     }
 });
