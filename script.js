@@ -5,6 +5,7 @@ async function sendMsg() {
     const msg = inp.value.trim();
     if (!msg) return;
 
+    // FIXED: wrap HTML inside quotes
     chat.innerHTML += <div><b>You:</b> ${msg}</div>;
     inp.value = "";
 
@@ -18,7 +19,7 @@ async function sendMsg() {
     chat.innerHTML += <div><b>AI:</b> ${data.reply}</div>;
 }
 
-// Enable Enter key
+// FIXED Enter key listener
 document.getElementById('prompt').addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         e.preventDefault();
