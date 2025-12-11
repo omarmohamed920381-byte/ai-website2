@@ -2,7 +2,7 @@ import OpenAI from "openai";
 
 export default async function handler(req, res) {
   try{
-    const client = new OpenAI({ apiKey: process.env.OMAR_AI_KEY });
+    const client = new OpenAI({ apiKey: apiKey: process.env.OPENAI_API_KEY });
     const userMsg = req.body.message || "";
 
     const completion = await client.chat.completions.create({
